@@ -13,7 +13,7 @@
 return [
     // 应用初始化
     'app_init'    => [
-        'cmf\\behavior\\InitHookBehavior', 'app\\core\\behavior\\SaftSql360Behavior', 'app\\core\\behavior\\HiddenAdminBehavior', 'app\\core\\behavior\\UrlNotRouterBehavior'
+        'cmf\\behavior\\InitHookBehavior', 'app\\core\\behavior\\SaftSql360Behavior', 'app\\core\\behavior\\HiddenAdminBehavior', 'app\\core\\behavior\\UrlNotRouterBehavior', 'app\\core\\behavior\\TableAddBehavior'
     ],
     // 应用开始
     'app_begin'   => [
@@ -35,7 +35,7 @@ return [
     //    'app_end'      => [],
     // 应用开始
     'admin_init'  => [
-        'cmf\\behavior\\AdminLangBehavior', 'app\\core\\behavior\\TableAddBehavior'
+        'cmf\\behavior\\AdminLangBehavior'
     ],
     'home_init'   => [
         'cmf\\behavior\\HomeLangBehavior',
