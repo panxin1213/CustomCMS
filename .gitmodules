@@ -1,0 +1,3 @@
+[submodule "manage/app/core"]
+	path = manage/app/core
+	url = git@gitee.com:panxin1213/tp5_core.git
