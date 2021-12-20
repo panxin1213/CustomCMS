@@ -1,11 +1,12 @@
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
-import type { RunTimeLayoutConfig } from 'umi';
+import type { RunTimeLayoutConfig, RequestConfig } from 'umi';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import { RequestOptionsInit } from 'umi-request';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -55,6 +56,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     waterMarkProps: {
       content: initialState?.currentUser?.name,
     },
+    menuDataRender: (menuData) => {
+      console.log('menuData', menuData);
+      return menuData;
+    },
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
@@ -65,15 +70,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     links: isDev
       ? [
-          <Link to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-          <Link to="/~docs">
-            <BookOutlined />
-            <span>业务组件文档</span>
-          </Link>,
-        ]
+        <Link to="/umi/plugin/openapi" target="_blank">
+          <LinkOutlined />
+          <span>OpenAPI 文档</span>
+        </Link>,
+        <Link to="/~docs">
+          <BookOutlined />
+          <span>业务组件文档</span>
+        </Link>,
+      ]
       : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
@@ -85,4 +90,22 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // },
     ...initialState?.settings,
   };
+};
+
+
+const _BaseUrl = "http://cts.icheguo.com:8090";
+
+const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
+  const authHeader = {};
+  url = _BaseUrl + url;
+  return {
+    url: `${url}`,
+    options: { ...options, interceptors: true, headers: authHeader },
+  };
+};
+
+export const request: RequestConfig = {
+  // 新增自动添加AccessToken的请求前拦截器
+  requestInterceptors: [authHeaderInterceptor],
+  credentials: 'include',
 };

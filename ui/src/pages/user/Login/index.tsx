@@ -50,6 +50,11 @@ const Login: React.FC = () => {
     try {
       // 登录
       const msg = await login({ ...values, type });
+
+      console.log('msg', msg);
+      return;
+
+
       if (msg.status === 'ok') {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
@@ -91,14 +96,14 @@ const Login: React.FC = () => {
             autoLogin: true,
           }}
           actions={[
-            <FormattedMessage
-              key="loginWith"
-              id="pages.login.loginWith"
-              defaultMessage="其他登录方式"
-            />,
-            <AlipayCircleOutlined key="AlipayCircleOutlined" className={styles.icon} />,
-            <TaobaoCircleOutlined key="TaobaoCircleOutlined" className={styles.icon} />,
-            <WeiboCircleOutlined key="WeiboCircleOutlined" className={styles.icon} />,
+            // <FormattedMessage
+            //   key="loginWith"
+            //   id="pages.login.loginWith"
+            //   defaultMessage="其他登录方式"
+            // />,
+            // <AlipayCircleOutlined key="AlipayCircleOutlined" className={styles.icon} />,
+            // <TaobaoCircleOutlined key="TaobaoCircleOutlined" className={styles.icon} />,
+            // <WeiboCircleOutlined key="WeiboCircleOutlined" className={styles.icon} />,
           ]}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
@@ -112,20 +117,20 @@ const Login: React.FC = () => {
                 defaultMessage: '账户密码登录',
               })}
             />
-            <Tabs.TabPane
+            {/* <Tabs.TabPane
               key="mobile"
               tab={intl.formatMessage({
                 id: 'pages.login.phoneLogin.tab',
                 defaultMessage: '手机号登录',
               })}
-            />
+            /> */}
           </Tabs>
 
           {status === 'error' && loginType === 'account' && (
             <LoginMessage
               content={intl.formatMessage({
                 id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '账户或密码错误(admin/ant.design)',
+                defaultMessage: '账户或密码错误',
               })}
             />
           )}
@@ -137,10 +142,7 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.username.placeholder',
-                  defaultMessage: '用户名: admin or user',
-                })}
+                placeholder={'请输入用户名'}
                 rules={[
                   {
                     required: true,
@@ -159,10 +161,7 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.password.placeholder',
-                  defaultMessage: '密码: ant.design',
-                })}
+                placeholder={'请输入密码'}
                 rules={[
                   {
                     required: true,
@@ -178,7 +177,7 @@ const Login: React.FC = () => {
             </>
           )}
 
-          {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
+          {/* {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
           {type === 'mobile' && (
             <>
               <ProFormText
@@ -259,7 +258,7 @@ const Login: React.FC = () => {
                 }}
               />
             </>
-          )}
+          )} */}
           <div
             style={{
               marginBottom: 24,

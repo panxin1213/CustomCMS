@@ -13,7 +13,9 @@
 return [
     // 应用初始化
     'app_init'    => [
-        'cmf\\behavior\\InitHookBehavior', 'app\\core\\behavior\\SaftSql360Behavior', 'app\\core\\behavior\\HiddenAdminBehavior', 'app\\core\\behavior\\UrlNotRouterBehavior', 'app\\core\\behavior\\TableAddBehavior'
+        'cmf\\behavior\\InitHookBehavior', 'app\\core\\behavior\\SaftSql360Behavior'
+        //, 'app\\core\\behavior\\HiddenAdminBehavior'
+        , 'app\\core\\behavior\\UrlNotRouterBehavior', 'app\\core\\behavior\\TableAddBehavior'
     ],
     // 应用开始
     'app_begin'   => [

@@ -20,7 +20,7 @@ return [
     // 数据库编码默认采用utf8
     'charset'  => 'utf8mb4',
     // 数据库表前缀
-    'prefix'   => 'cmf_',
+    'prefix'   => 'cms_',
     "authcode" => 'TT3DoftjTuZXkPYw1c',
     //#COOKIE_PREFIX#
 ];
