@@ -51,11 +51,7 @@ const Login: React.FC = () => {
       // 登录
       const msg = await login({ ...values, type });
 
-      console.log('msg', msg);
-      return;
-
-
-      if (msg.status === 'ok') {
+      if (msg.code) {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
@@ -71,7 +67,7 @@ const Login: React.FC = () => {
       }
       console.log(msg);
       // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
+      setUserLoginState({ status: "error", type: 'account' });
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',

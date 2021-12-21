@@ -2,6 +2,11 @@
 /* eslint-disable */
 
 declare namespace API {
+  type CustomData = {
+    code: 1 | 0,
+    data?: any
+  };
+
   type CurrentUser = {
     name?: string;
     avatar?: string;
