@@ -4,6 +4,7 @@ namespace app\common\traits;
 
 use think\Response;
 use think\exception\HttpResponseException;
+use think\facade\View;
 use think\Request;
 
 
@@ -16,6 +17,7 @@ trait ControllerTraits
         $type = $this->getResponseType();
 
         $response = Response::create($result, $type);
+        
         $header = $this->GetResponseAccessHeader();
         $response = $response->header($header);
         throw new HttpResponseException($response);

@@ -50,7 +50,7 @@ class LoginValidate extends BaseValidate
     protected function validuser($value, $rule, $data)
     {
         $asv = new AdminService();
-        $asv->SetWith("rightlist,rolemodel");
+        $asv->SetWith("rolemodel");
 
         $um = $asv->Get(['mobile' => $value]);
 

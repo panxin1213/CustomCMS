@@ -7,6 +7,22 @@ declare namespace API {
     data?: any
   };
 
+  type GetUser = {
+    menulist?: MenuItem[],
+    user: any
+  }
+
+  type MenuItem = {
+    addtime?: string;
+    des?: string;
+    id: number;
+    islock: number;
+    name?: string;
+    orderid: number
+    parentid: number
+    type?: string;
+  }
+
   type CurrentUser = {
     name?: string;
     avatar?: string;
@@ -20,6 +36,7 @@ declare namespace API {
     unreadCount?: number;
     country?: string;
     access?: string;
+    menuids?: number[];
     geographic?: {
       province?: { label?: string; key?: string };
       city?: { label?: string; key?: string };

@@ -1,20 +1,25 @@
 import {
-  AlipayCircleOutlined,
   LockOutlined,
-  MobileOutlined,
-  TaobaoCircleOutlined,
   UserOutlined,
-  WeiboCircleOutlined,
 } from '@ant-design/icons';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
-import { ProFormCaptcha, ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
+import { ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
 import { useIntl, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
-import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 
 import styles from './index.less';
+
+export const initUser = (getUser: API.GetUser | undefined): API.CurrentUser => {
+  return {
+    avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+    name: getUser?.user?.name,
+    userid: getUser?.user?.id,
+    access: "admin",
+    menuids: getUser?.user?.menuids ?? []
+  }
+}
 
 const LoginMessage: React.FC<{
   content: string;
@@ -37,11 +42,12 @@ const Login: React.FC = () => {
   const intl = useIntl();
 
   const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
-    if (userInfo) {
+    const getUser = await initialState?.fetchUserInfo?.();
+    if (getUser) {
       await setInitialState((s) => ({
         ...s,
-        currentUser: userInfo,
+        menulist: getUser?.menulist,
+        currentUser: initUser(getUser)
       }));
     }
   };

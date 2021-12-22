@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use app\admin\service\AdminService;
 use think\Controller;
 use app\common\traits\ControllerTraits;
+use think\Config;
 
 class BaseController extends Controller
 {
@@ -29,5 +30,12 @@ class BaseController extends Controller
                 $this->admin = $admin;
             }
         }
+    }
+
+
+    
+    protected function getResponseType()
+    {
+        return Config::get('default_ajax_return');
     }
 }
